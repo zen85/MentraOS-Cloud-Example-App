@@ -1,12 +1,18 @@
 import { AppServer, AppSession, ViewType } from '@mentra/sdk';
 
-
-const PACKAGE_NAME = process.env.PACKAGE_NAME ?? (() => { throw new Error('PACKAGE_NAME is not set in .env file'); })();
-const MENTRAOS_API_KEY = process.env.MENTRAOS_API_KEY ?? (() => { throw new Error('MENTRAOS_API_KEY is not set in .env file'); })();
+const PACKAGE_NAME =
+  process.env.PACKAGE_NAME ??
+  (() => {
+    throw new Error('PACKAGE_NAME is not set in .env file');
+  })();
+const MENTRAOS_API_KEY =
+  process.env.MENTRAOS_API_KEY ??
+  (() => {
+    throw new Error('MENTRAOS_API_KEY is not set in .env file');
+  })();
 const PORT = parseInt(process.env.PORT || '3000');
 
 class ExampleMentraOSApp extends AppServer {
-
   constructor() {
     super({
       packageName: PACKAGE_NAME,
@@ -17,22 +23,22 @@ class ExampleMentraOSApp extends AppServer {
 
   protected async onSession(session: AppSession, sessionId: string, userId: string): Promise<void> {
     // Show welcome message
-    session.layouts.showTextWall("Example2 App is ready!");
+    session.layouts.showTextWall('Example44 App is ready!');
 
     // Handle real-time transcription
     // requires microphone permission to be set in the developer console
     session.events.onTranscription((data) => {
       if (data.isFinal) {
-        session.layouts.showTextWall("You said: " + data.text, {
+        session.layouts.showTextWall('You said: ' + data.text, {
           view: ViewType.MAIN,
-          durationMs: 3000
+          durationMs: 3000,
         });
       }
-    })
+    });
 
     session.events.onGlassesBattery((data) => {
       console.log('Glasses battery:', data);
-    })
+    });
   }
 }
 
